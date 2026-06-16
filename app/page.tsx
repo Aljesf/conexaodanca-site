@@ -140,13 +140,36 @@ const CSS = `
 .cd-site .soc a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;font-size:18px;padding:0}
 .cd-site .soc a:hover{background:var(--roxo)}
 @media(max-width:860px){.cd-site .foot-grid{grid-template-columns:1fr 1fr}}
+.cd-site .valores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px}
+.cd-site .vcard{background:#fff;border:1px solid #efe7ff;border-radius:var(--radius);padding:28px 24px;box-shadow:0 14px 34px rgba(60,30,120,.07)}
+.cd-site .vcard .vic{font-size:30px;display:block;margin-bottom:12px}
+.cd-site .vcard h3{font-family:'Plus Jakarta Sans';font-weight:700;font-size:18px;margin-bottom:8px}
+.cd-site .vcard p{font-size:14px;color:var(--muted)}
+@media(max-width:860px){.cd-site .valores-grid{grid-template-columns:1fr}}
+.cd-site .director{background:var(--lilas)}
+.cd-site .dir-inner{display:grid;grid-template-columns:.8fr 1.2fr;gap:46px;align-items:center}
+.cd-site .dir-ph{aspect-ratio:4/5;border-radius:26px;overflow:hidden;background:var(--lilas-2);display:grid;place-items:center;color:var(--roxo);font-size:64px;box-shadow:0 20px 50px rgba(60,30,120,.14)}
+.cd-site .dir-ph img{width:100%;height:100%;object-fit:cover}
+.cd-site .director .role{color:var(--roxo);font-weight:600;margin:6px 0 16px;display:block;font-size:15px}
+.cd-site .director p{color:#4a3d68;font-size:16px;margin-bottom:12px;max-width:60ch}
+@media(max-width:760px){.cd-site .dir-inner{grid-template-columns:1fr}.cd-site .dir-ph{max-width:320px}}
+.cd-site .apoiadores{background:var(--preto);color:#fff}
+.cd-site .apoiadores .lead{color:#cbbce8}
+.cd-site .apoio-destaque{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:34px;margin-top:36px}
+.cd-site .badge{display:inline-block;background:var(--grad);color:#fff;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;margin-bottom:14px}
+.cd-site .apoio-destaque h3{font-size:30px;margin-bottom:10px}
+.cd-site .apoio-destaque p{color:#cbbce8;max-width:64ch;font-size:16px}
+.cd-site .apoio-cta{margin-top:26px;color:#cbbce8;font-size:16px}
+.cd-site .apoio-cta a{color:#fff;text-decoration:underline}
+.cd-site .embreve{margin-top:42px;border:1.5px dashed #d9ccf5;border-radius:var(--radius);padding:48px 24px;text-align:center;color:var(--muted)}
+.cd-site .embreve b{display:block;font-family:'Fraunces',serif;font-size:24px;color:var(--tinta);margin-bottom:8px;font-weight:600}
 `;
 
 const BODY = `
 <header class="nav"><div class="wrap nav-inner">
   <a href="#topo" class="brand"><img src="/logo-conexao.png" alt="Conexão Dança" /> Conexão Dança</a>
   <nav class="navlinks">
-    <a href="#modalidades">Modalidades</a><a href="#eventos">Eventos</a><a href="#noticias">Notícias</a><a href="#cafe">Café</a><a href="#equipe">Equipe</a><a href="#contato">Contato</a>
+    <a href="#sobre">Sobre</a><a href="#modalidades">Modalidades</a><a href="#eventos">Eventos</a><a href="#cafe">Café</a><a href="#equipe">Direção</a><a href="#contato">Contato</a>
   </nav>
   <div class="nav-cta">
     <a href="${SISTEMA}/portal/login" class="btn btn-out hide-sm">Portal do Responsável</a>
@@ -155,9 +178,9 @@ const BODY = `
 </div></header>
 
 <section class="hero" id="topo"><div class="hero-bg"></div><div class="wrap hero-inner">
-  <span class="eyebrow" style="color:#ffd6ec">Escola de Dança • Salinópolis/PA</span>
+  <span class="eyebrow" style="color:#ffd6ec">Centro de formação artística e cultural • Salinópolis/PA</span>
   <h1>O movimento que <em>conecta</em> corpo, arte e família.</h1>
-  <p>Ballet, jazz, hip hop, contemporâneo e muito mais. Aulas para todas as idades, do baby class ao avançado — num espaço feito para dançar, criar e pertencer.</p>
+  <p>Ballet, jazz, hip hop e muito mais, para todas as idades — com metodologia reconhecida internacionalmente e o coração na cultura amazônica. Mais que uma escola: um movimento.</p>
   <div class="hero-cta"><a href="#modalidades" class="btn btn-grad">Conheça as aulas</a><a href="#contato" class="btn btn-ghost">Agende uma aula experimental</a></div>
   <div class="hero-stats"><div><div class="n">10+</div><div class="l">anos de história</div></div><div><div class="n">12</div><div class="l">modalidades</div></div><div><div class="n">300+</div><div class="l">alunos por temporada</div></div><div><div class="n">2</div><div class="l">grandes espetáculos/ano</div></div></div>
 </div></section>
@@ -168,6 +191,16 @@ const BODY = `
   <a href="${SISTEMA}/webloja" class="acard"><span class="ic" style="background:linear-gradient(135deg,#6a3df5,#9a5cff)">🛍</span><h3>Web Loja</h3><p>Figurinos, calçados e produtos oficiais da escola.</p><span class="go">Ir às compras →</span></a>
   <a href="${SISTEMA}/ingressos" class="acard"><span class="ic" style="background:linear-gradient(135deg,#ff7a3d,#ff5ca8)">🎟</span><h3>Bilheteria</h3><p>Ingressos dos espetáculos, direto e sem fila.</p><span class="go">Comprar ingresso →</span></a>
 </div></section>
+
+<section class="sec wrap sobre" id="sobre">
+  <span class="eyebrow">O movimento Conexão Dança</span><h2>Mais que uma escola, um movimento</h2>
+  <p class="lead">Somos um centro de formação artística e cultural em Salinópolis, no coração da Amazônia. Formamos bailarinos, fortalecemos a cultura paraense e usamos a dança como instrumento de inclusão social e transformação — levando arte e oportunidade a diferentes comunidades da nossa cidade e região.</p>
+  <div class="valores-grid">
+    <div class="vcard"><span class="vic">🩰</span><h3>Formação de excelência</h3><p>Metodologias reconhecidas internacionalmente — Vaganova, Jazz For Fun e o Hip-Hop do IDMUS — com o selo do CID, Conselho Internacional de Dança da UNESCO.</p></div>
+    <div class="vcard"><span class="vic">🤝</span><h3>Inclusão e protagonismo</h3><p>Mais de 40 alunos em situação de vulnerabilidade têm acesso gratuito à formação artística e ao reconhecimento internacional.</p></div>
+    <div class="vcard"><span class="vic">🌿</span><h3>Cultura amazônica</h3><p>Valorizamos a identidade paraense e a arte como vetor de desenvolvimento humano, turismo e economia criativa.</p></div>
+  </div>
+</section>
 
 <section class="sec wrap" id="modalidades">
   <span class="eyebrow">Modalidades</span><h2>Encontre a sua dança</h2>
@@ -184,21 +217,14 @@ const BODY = `
 
 <section class="sec eventos" id="eventos"><div class="wrap">
   <span class="eyebrow">Eventos & Espetáculos</span><h2>Próximos espetáculos</h2>
-  <p class="lead">Compre seu ingresso direto pela bilheteria — sem passar pela loja, sem fila no dia.</p>
-  <div class="ev-grid">
-    <div class="evcard"><div class="ph"><img src="https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?auto=format&fit=crop&w=900&q=80" alt="Brasilidades"><div class="date"><div class="d">20</div><div class="m">Jun</div></div></div><div class="body"><h3>Brasilidades — Mostra Anual</h3><div class="meta"><span>📍 Teatro Conexão</span><span>🕕 18h30</span></div><p style="font-size:15px;color:var(--muted)">Uma viagem pelas danças e ritmos do Brasil, com todas as turmas no palco.</p><a href="${SISTEMA}/ingressos/brasilidades" class="btn btn-grad">🎟 Comprar ingresso</a></div></div>
-    <div class="evcard"><div class="ph"><img src="https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?auto=format&fit=crop&w=900&q=80" alt="Gala"><div class="date"><div class="d">14</div><div class="m">Dez</div></div></div><div class="body"><h3>Gala de Fim de Ano</h3><div class="meta"><span>📍 Teatro Conexão</span><span>🕕 19h00</span></div><p style="font-size:15px;color:var(--muted)">O encerramento da temporada com os grandes números do ano e homenagens.</p><a href="${SISTEMA}/ingressos/gala-fim-de-ano" class="btn btn-out">Em breve · avise-me</a></div></div>
-  </div>
+  <p class="lead">Espetáculos, mostras e festivais ao longo do ano. Os ingressos são vendidos direto pela bilheteria — sem passar pela loja, sem fila no dia.</p>
+  <div class="embreve"><b>Próximos espetáculos em breve</b>Estamos preparando a próxima agenda. Acompanhe por aqui e pelo nosso Instagram.<br><a href="${SISTEMA}/ingressos" class="btn btn-grad" style="margin-top:18px">🎟 Ver a bilheteria</a></div>
 </div></section>
 
 <section class="sec wrap" id="noticias">
   <span class="eyebrow">Notícias de dança</span><h2>Fique por dentro</h2>
-  <p class="lead">Novidades da escola, dicas dos professores e o que está acontecendo no mundo da dança.</p>
-  <div class="news-grid">
-    <article class="ncard"><div class="ph"><img src="https://images.unsplash.com/photo-1495791185843-c73f2269f669?auto=format&fit=crop&w=700&q=80" alt=""></div><div class="body"><span class="tag">Escola</span><h3>Matrículas abertas para a temporada 2026</h3><p>Garanta a vaga da sua turma preferida. Novas modalidades chegando.</p></div></article>
-    <article class="ncard"><div class="ph"><img src="https://images.unsplash.com/photo-1490725263030-1f0521cec05c?auto=format&fit=crop&w=700&q=80" alt=""></div><div class="body"><span class="tag">Bastidores</span><h3>Os bastidores de Brasilidades</h3><p>Meses de ensaio para uma noite inesquecível. Veja como foi a preparação.</p></div></article>
-    <article class="ncard"><div class="ph"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=700&q=80" alt=""></div><div class="body"><span class="tag">Dicas</span><h3>5 alongamentos para quem dança ballet</h3><p>A rotina ideal antes da aula, recomendada pelas professoras.</p></div></article>
-  </div>
+  <p class="lead">Novidades da escola, bastidores e ações do movimento Conexão Dança.</p>
+  <div class="embreve"><b>Conteúdo novo a caminho</b>Em breve, notícias, bastidores e histórias por aqui. Por enquanto, o dia a dia da escola está no nosso Instagram, logo abaixo.</div>
 </section>
 
 <section class="sec insta"><div class="wrap">
@@ -211,15 +237,25 @@ const BODY = `
   <div class="cafe-img"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80" alt="Café"></div>
 </div></section>
 
-<section class="sec wrap" id="equipe">
-  <span class="eyebrow">Nossa equipe</span><h2>Professores que inspiram</h2><p class="lead">Um time apaixonado por dança e por gente.</p>
-  <div class="team-grid">
-    <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Glenda</h3><p>Direção & Ballet</p></div>
-    <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Lucas</h3><p>Hip Hop & Urbanas</p></div>
-    <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Marina</h3><p>Jazz & Contemporâneo</p></div>
-    <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Gabrielle Ribeiro</h3><p>Diretora Geral & Coreografia</p></div>
+<section class="sec director" id="equipe"><div class="wrap">
+  <span class="eyebrow">Direção</span><h2>Gabrielle Ribeiro</h2>
+  <div class="dir-inner" style="margin-top:30px">
+    <div class="dir-ph">GR</div>
+    <div>
+      <span class="role">Diretora Geral · Artista, coreógrafa e empreendedora cultural</span>
+      <p>À frente da Conexão Dança, Gabrielle é reconhecida nacionalmente na comunidade da dança e é membro fundadora do CID — Conselho Internacional de Dança da UNESCO, seção Belém, e do Colegiado de Dança do Pará.</p>
+      <p>Com ampla experiência em gestão de projetos, produção artística e formação cultural, lidera um trabalho que une excelência técnica, inclusão social e valorização da cultura amazônica.</p>
+      <p style="color:var(--muted);font-size:14px">Conheça em breve todo o time de professores que faz a Conexão Dança acontecer.</p>
+    </div>
   </div>
-</section>
+</div></section>
+
+<section class="sec apoiadores" id="apoiadores"><div class="wrap">
+  <span class="eyebrow" style="color:#ff8ac0">Apoiadores</span><h2 style="color:#fff">Quem caminha com a gente</h2>
+  <p class="lead">Parcerias que tornam possível levar dança, formação e oportunidade a mais gente.</p>
+  <div class="apoio-destaque"><span class="badge">Patrocinador Oficial</span><h3>GAV Resorts</h3><p>Uma das maiores redes de multipropriedades do Brasil e parceira dos nossos projetos sociais — viabilizando formação artística gratuita para mais de 40 alunos em situação de vulnerabilidade, com acesso ao reconhecimento internacional do CID/UNESCO.</p></div>
+  <p class="apoio-cta">Sua empresa também pode fazer parte desse movimento. <a href="#contato">Seja um apoiador</a>.</p>
+</div></section>
 
 <section class="sec contato" id="contato"><div class="wrap">
   <span class="eyebrow">Contato & Localização</span><h2>Venha dançar com a gente</h2>
@@ -242,8 +278,8 @@ const BODY = `
 
 <footer><div class="wrap">
   <div class="foot-grid">
-    <div><a href="#topo" class="brand" style="color:#fff;margin-bottom:14px"><span class="mark">✦</span> Conexão Dança</a><p style="font-size:14px;max-width:34ch">Escola de dança para todas as idades. Arte, técnica e comunidade desde 2014.</p><div class="soc"><a href="https://instagram.com/conexaodanca.ltda">⌾</a><a href="https://wa.me/5591986023030">✆</a><a href="mailto:contato@conexaodanca.com">✉</a></div></div>
-    <div><h4>Navegar</h4><a href="#modalidades">Modalidades</a><a href="#eventos">Eventos</a><a href="#noticias">Notícias</a><a href="#cafe">Café</a><a href="#equipe">Equipe</a></div>
+    <div><a href="#topo" class="brand" style="color:#fff;margin-bottom:14px"><span class="mark">✦</span> Conexão Dança</a><p style="font-size:14px;max-width:34ch">Centro de formação artística e cultural em Salinópolis-PA. Dança, inclusão e cultura amazônica.</p><div class="soc"><a href="https://instagram.com/conexaodanca.ltda">⌾</a><a href="https://wa.me/5591986023030">✆</a><a href="mailto:contato@conexaodanca.com">✉</a></div></div>
+    <div><h4>Navegar</h4><a href="#sobre">Sobre</a><a href="#modalidades">Modalidades</a><a href="#eventos">Eventos</a><a href="#cafe">Café</a><a href="#equipe">Direção</a><a href="#apoiadores">Apoiadores</a></div>
     <div><h4>Acessos</h4><a href="${SISTEMA}/login">Sistema</a><a href="${SISTEMA}/portal/login">Portal do Responsável</a><a href="${SISTEMA}/webloja">Web Loja</a><a href="${SISTEMA}/ingressos">Bilheteria</a><a href="${SISTEMA}/cafe/cardapio">Cardápio do Café</a></div>
     <div><h4>Contato</h4><a href="#contato">Viela Joaquim Távora, 44 — Salinópolis-PA</a><a href="tel:+5591986023030">(91) 98602-3030</a><a href="mailto:contato@conexaodanca.com">contato@conexaodanca.com</a></div>
   </div>
