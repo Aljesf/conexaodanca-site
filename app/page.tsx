@@ -163,6 +163,25 @@ const CSS = `
 .cd-site .apoio-cta a{color:#fff;text-decoration:underline}
 .cd-site .embreve{margin-top:42px;border:1.5px dashed #d9ccf5;border-radius:var(--radius);padding:48px 24px;text-align:center;color:var(--muted)}
 .cd-site .embreve b{display:block;font-family:'Fraunces',serif;font-size:24px;color:var(--tinta);margin-bottom:8px;font-weight:600}
+.cd-site .painel{background:linear-gradient(135deg,#2a1655,#1c1430);color:#fff}
+.cd-site .painel .lead{color:#cbbce8}
+.cd-site .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:38px}
+.cd-site .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:26px 18px;text-align:center}
+.cd-site .stat .num{font-family:'Fraunces',serif;font-size:46px;font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.cd-site .stat .lbl{font-size:13px;color:#cbbce8;margin-top:8px}
+@media(max-width:760px){.cd-site .stats-row{grid-template-columns:repeat(2,1fr)}}
+.cd-site .hoje-box{margin-top:34px;background:rgba(140,82,255,.14);border:1px solid rgba(140,82,255,.4);border-radius:18px;padding:22px 24px}
+.cd-site .hoje-box h3{font-family:'Plus Jakarta Sans';font-size:17px;margin-bottom:12px;color:#fff;font-weight:700}
+.cd-site .chips{display:flex;gap:10px;flex-wrap:wrap}
+.cd-site .chip{background:rgba(255,255,255,.1);border-radius:999px;padding:7px 15px;font-size:13px;color:#fff}
+.cd-site .chip.off{color:#9d8fc0}
+.cd-site .grade-wk{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:30px}
+.cd-site .gcol{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;min-height:96px}
+.cd-site .gcol.today{border-color:var(--roxo);background:rgba(140,82,255,.12)}
+.cd-site .gcol h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#cbbce8;margin-bottom:10px;font-weight:700}
+.cd-site .gcol .gi{font-size:12.5px;color:#e7ddff;padding:4px 0;border-top:1px solid rgba(255,255,255,.07)}
+.cd-site .painel .atualizado{margin-top:22px;font-size:12px;color:#8d7eb0}
+@media(max-width:760px){.cd-site .grade-wk{grid-template-columns:repeat(2,1fr)}}
 `;
 
 const BODY = `
@@ -201,6 +220,8 @@ const BODY = `
     <div class="vcard"><span class="vic">🌿</span><h3>Cultura amazônica</h3><p>Valorizamos a identidade paraense e a arte como vetor de desenvolvimento humano, turismo e economia criativa.</p></div>
   </div>
 </section>
+
+<!--PAINEL-->
 
 <section class="sec wrap" id="modalidades">
   <span class="eyebrow">Modalidades</span><h2>Encontre a sua dança</h2>
@@ -324,9 +345,53 @@ async function fetchInstagramGrid(): Promise<string> {
   }
 }
 
+const DIAS_ORDEM = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+// Painel ao vivo: lê os números agregados do sistema (conexaodanca.art.br).
+// Some (string vazia) se o sistema não responder.
+async function fetchPainel(): Promise<string> {
+  try {
+    const res = await fetch("https://conexaodanca.art.br/api/public/stats", {
+      next: { revalidate: 1800 },
+    });
+    if (!res.ok) return "";
+    const d: any = await res.json();
+    if (!d || typeof d.alunos !== "number") return "";
+    const grade: Array<{ dia: string; modalidade: string }> = Array.isArray(d.grade) ? d.grade : [];
+    const hoje = String(d.hoje || "");
+    const hojeMods = Array.from(new Set(grade.filter((g) => g.dia === hoje).map((g) => g.modalidade)));
+    const hojeHtml = hojeMods.length
+      ? hojeMods.map((m) => `<span class="chip">${esc(m)}</span>`).join("")
+      : `<span class="chip off">Sem aulas hoje</span>`;
+    const cols = DIAS_ORDEM.map((dia) => {
+      const mods = Array.from(new Set(grade.filter((g) => g.dia === dia).map((g) => g.modalidade)));
+      const items = mods.length
+        ? mods.map((m) => `<div class="gi">${esc(m)}</div>`).join("")
+        : `<div class="gi" style="color:#7a6ca3">—</div>`;
+      return `<div class="gcol${dia === hoje ? " today" : ""}"><h4>${dia}</h4>${items}</div>`;
+    }).join("");
+    const nMod = Array.isArray(d.modalidades) ? d.modalidades.length : 0;
+    return `<section class="sec painel" id="painel"><div class="wrap">
+  <span class="eyebrow" style="color:#ff8ac0">A escola agora</span><h2 style="color:#fff">A Conexão Dança, ao vivo</h2>
+  <p class="lead">Direto do nosso sistema — números reais que se atualizam sozinhos.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="num">${d.alunos}</div><div class="lbl">alunos ativos</div></div>
+    <div class="stat"><div class="num">${d.bolsistas}</div><div class="lbl">bolsistas do movimento</div></div>
+    <div class="stat"><div class="num">${d.turmasAtivas}</div><div class="lbl">turmas ativas</div></div>
+    <div class="stat"><div class="num">${nMod}</div><div class="lbl">modalidades</div></div>
+  </div>
+  <div class="hoje-box"><h3>Hoje na Conexão Dança</h3><div class="chips">${hojeHtml}</div></div>
+  <div class="grade-wk">${cols}</div>
+  <p class="atualizado">Leitura automática do sistema da escola, atualizada a cada 30 min.</p>
+</div></section>`;
+  } catch {
+    return "";
+  }
+}
+
 export default async function HomePage() {
-  const igGrid = await fetchInstagramGrid();
-  const body = BODY.replace("<!--IG_GRID-->", igGrid);
+  const [igGrid, painel] = await Promise.all([fetchInstagramGrid(), fetchPainel()]);
+  const body = BODY.replace("<!--IG_GRID-->", igGrid).replace("<!--PAINEL-->", painel);
   return (
     <div className="cd-site">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
