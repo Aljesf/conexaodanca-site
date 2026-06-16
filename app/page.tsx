@@ -171,11 +171,11 @@ const BODY = `
 
 <section class="sec wrap" id="modalidades">
   <span class="eyebrow">Modalidades</span><h2>Encontre a sua dança</h2>
-  <p class="lead">Turmas divididas por idade e nível, com professores especializados e metodologia própria.</p>
+  <p class="lead">Turmas divididas por idade e nível, com metodologias reconhecidas internacionalmente — Vaganova no Ballet, Jazz For Fun e o Hip-Hop do IDMUS — e o selo do CID, Conselho Internacional de Dança da UNESCO.</p>
   <div class="mod-grid">
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=800&q=80" alt="Ballet"><div class="cap"><h3>Ballet Clássico</h3><p>Baby class, infantil, juvenil e adulto</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=800&q=80" alt="Jazz"><div class="cap"><h3>Jazz Dance</h3><p>Técnica, expressão e palco</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1535525153412-5a42439a210d?auto=format&fit=crop&w=800&q=80" alt="Hip Hop"><div class="cap"><h3>Hip Hop</h3><p>Cultura urbana e coreografia</p></div></div>
+    <div class="mcard"><img src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=800&q=80" alt="Ballet"><div class="cap"><h3>Ballet Clássico</h3><p>Metodologia Vaganova · do baby class ao adulto</p></div></div>
+    <div class="mcard"><img src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=800&q=80" alt="Jazz"><div class="cap"><h3>Jazz Dance</h3><p>Método Jazz For Fun · técnica e palco</p></div></div>
+    <div class="mcard"><img src="https://images.unsplash.com/photo-1535525153412-5a42439a210d?auto=format&fit=crop&w=800&q=80" alt="Hip Hop"><div class="cap"><h3>Hip Hop</h3><p>Cultura urbana com o IDMUS · coreografia</p></div></div>
     <div class="mcard"><img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=800&q=80" alt="Contemporâneo"><div class="cap"><h3>Contemporâneo</h3><p>Criação e linguagem do corpo</p></div></div>
     <div class="mcard"><img src="https://images.unsplash.com/photo-1524117074681-31bd4de22ad3?auto=format&fit=crop&w=800&q=80" alt="Baby Class"><div class="cap"><h3>Baby Class</h3><p>Primeiros passos, a partir de 3 anos</p></div></div>
     <div class="mcard"><img src="https://images.unsplash.com/photo-1583244532610-2a234e7c3e84?auto=format&fit=crop&w=800&q=80" alt="Danças Urbanas"><div class="cap"><h3>Danças Urbanas</h3><p>Street, K-pop e freestyle</p></div></div>
@@ -217,7 +217,7 @@ const BODY = `
     <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Glenda</h3><p>Direção & Ballet</p></div>
     <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Lucas</h3><p>Hip Hop & Urbanas</p></div>
     <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Marina</h3><p>Jazz & Contemporâneo</p></div>
-    <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Gabrielle</h3><p>Baby Class & Coach</p></div>
+    <div class="tcard"><div class="ph"><img src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=500&q=80" alt=""></div><h3>Gabrielle Ribeiro</h3><p>Diretora Geral & Coreografia</p></div>
   </div>
 </section>
 
@@ -225,13 +225,13 @@ const BODY = `
   <span class="eyebrow">Contato & Localização</span><h2>Venha dançar com a gente</h2>
   <div class="ct-inner" style="margin-top:38px">
     <div class="ct-card">
-      <div class="ct-item"><span class="ic">📍</span><div><b>Endereço</b><span>Salinópolis/PA</span></div></div>
-      <div class="ct-item"><span class="ic">📞</span><div><b>Telefone / WhatsApp</b><span>(91) 9 0000-0000</span></div></div>
+      <div class="ct-item"><span class="ic">📍</span><div><b>Endereço</b><span>Viela Joaquim Távora, 44 — Bairro Novo, Salinópolis-PA · CEP 66.050-080</span></div></div>
+      <div class="ct-item"><span class="ic">📞</span><div><b>Telefone / WhatsApp</b><span>(91) 98602-3030</span></div></div>
       <div class="ct-item"><span class="ic">✉</span><div><b>E-mail</b><span>contato@conexaodanca.com</span></div></div>
       <div class="ct-item"><span class="ic">🕐</span><div><b>Horário</b><span>Seg a Sex, 8h–21h · Sáb, 8h–13h</span></div></div>
-      <a href="https://wa.me/5591900000000" class="btn btn-grad" style="margin-top:8px">Falar no WhatsApp</a>
+      <a href="https://wa.me/5591986023030" class="btn btn-grad" style="margin-top:8px">Falar no WhatsApp</a>
     </div>
-    <div class="map"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Salin%C3%B3polis,PA&output=embed"></iframe></div>
+    <div class="map"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Viela+Joaquim+T%C3%A1vora+44+Bairro+Novo+Salin%C3%B3polis+PA&output=embed"></iframe></div>
   </div>
 </div></section>
 
@@ -242,10 +242,10 @@ const BODY = `
 
 <footer><div class="wrap">
   <div class="foot-grid">
-    <div><a href="#topo" class="brand" style="color:#fff;margin-bottom:14px"><span class="mark">✦</span> Conexão Dança</a><p style="font-size:14px;max-width:34ch">Escola de dança para todas as idades. Arte, técnica e comunidade desde 2014.</p><div class="soc"><a href="https://instagram.com/conexaodanca.ltda">⌾</a><a href="https://wa.me/5591900000000">✆</a><a href="mailto:contato@conexaodanca.com">✉</a></div></div>
+    <div><a href="#topo" class="brand" style="color:#fff;margin-bottom:14px"><span class="mark">✦</span> Conexão Dança</a><p style="font-size:14px;max-width:34ch">Escola de dança para todas as idades. Arte, técnica e comunidade desde 2014.</p><div class="soc"><a href="https://instagram.com/conexaodanca.ltda">⌾</a><a href="https://wa.me/5591986023030">✆</a><a href="mailto:contato@conexaodanca.com">✉</a></div></div>
     <div><h4>Navegar</h4><a href="#modalidades">Modalidades</a><a href="#eventos">Eventos</a><a href="#noticias">Notícias</a><a href="#cafe">Café</a><a href="#equipe">Equipe</a></div>
     <div><h4>Acessos</h4><a href="${SISTEMA}/login">Sistema</a><a href="${SISTEMA}/portal/login">Portal do Responsável</a><a href="${SISTEMA}/webloja">Web Loja</a><a href="${SISTEMA}/ingressos">Bilheteria</a><a href="${SISTEMA}/cafe/cardapio">Cardápio do Café</a></div>
-    <div><h4>Contato</h4><a href="#contato">Salinópolis/PA</a><a href="tel:+5591900000000">(91) 9 0000-0000</a><a href="mailto:contato@conexaodanca.com">contato@conexaodanca.com</a></div>
+    <div><h4>Contato</h4><a href="#contato">Viela Joaquim Távora, 44 — Salinópolis-PA</a><a href="tel:+5591986023030">(91) 98602-3030</a><a href="mailto:contato@conexaodanca.com">contato@conexaodanca.com</a></div>
   </div>
   <div class="foot-bottom"><span>© 2026 Conexão Dança. Todos os direitos reservados.</span><span>Feito com ♥ para quem dança.</span></div>
 </div></footer>
