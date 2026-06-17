@@ -55,9 +55,11 @@ const CSS = `
 .cd-site .hero h1 em{font-style:italic;color:#ffd6ec}
 .cd-site .hero p{font-size:20px;max-width:50ch;color:#f0e9ff;margin-bottom:34px}
 .cd-site .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-.cd-site .hero-stats{display:flex;gap:40px;margin-top:54px;flex-wrap:wrap}
-.cd-site .hero-stats .n{font-family:'Fraunces',serif;font-size:38px;font-weight:600}
-.cd-site .hero-stats .l{font-size:14px;color:#e7ddff;opacity:.9}
+.cd-site .hero-selos{display:flex;gap:14px;margin-top:48px;flex-wrap:wrap}
+.cd-site .selo{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:15px;padding:13px 17px;backdrop-filter:blur(6px);max-width:320px}
+.cd-site .selo .si{font-size:21px;flex-shrink:0;line-height:1}
+.cd-site .selo b{display:block;font-size:14px;color:#fff;font-weight:700;line-height:1.2}
+.cd-site .selo span{font-size:12px;color:#e7ddff;line-height:1.3}
 .cd-site .acessos{margin-top:-60px;position:relative;z-index:5}
 .cd-site .acessos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .cd-site .acard{background:#fff;border:1px solid #efe7ff;border-radius:var(--radius);padding:26px 22px;box-shadow:0 18px 44px rgba(60,30,120,.10);transition:.2s;display:flex;flex-direction:column;gap:10px}
@@ -91,6 +93,12 @@ const CSS = `
 .cd-site .evcard .meta{font-size:14px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap}
 .cd-site .evcard .body .btn{margin-top:auto;align-self:flex-start}
 @media(max-width:760px){.cd-site .ev-grid{grid-template-columns:1fr}}
+.cd-site .evcard .ph.evph{background:var(--grad);display:grid;place-items:center}
+.cd-site .evcard .ph.evph .evph-ic{font-size:64px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25))}
+.cd-site .evcard .fest{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rosa)}
+.cd-site .evcard .meta span{display:inline-flex;align-items:center;gap:6px}
+.cd-site .ev-note{margin-top:26px;font-size:14px;color:var(--muted)}
+.cd-site .ev-note a{color:var(--roxo);font-weight:600;text-decoration:underline}
 .cd-site .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px}
 .cd-site .ncard{border:1px solid #ece2ff;border-radius:var(--radius);overflow:hidden;background:#fff;transition:.2s}
 .cd-site .ncard:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(60,30,120,.12)}
@@ -218,16 +226,20 @@ const BODY = `
 <section class="hero" id="topo"><div class="hero-bg"></div><div class="wrap hero-inner">
   <span class="eyebrow" style="color:#ffd6ec">Centro de formação artística e cultural • Salinópolis/PA</span>
   <h1>O movimento que <em>conecta</em> corpo, arte e família.</h1>
-  <p>Ballet, jazz, hip hop e muito mais, para todas as idades — com metodologia reconhecida internacionalmente e o coração na cultura amazônica. Mais que uma escola: um movimento.</p>
+  <p>Dançar é formar corpo, mente e caráter. Em cada aula — do ballet ao hip hop, para todas as idades — nascem disciplina, expressão e autoconfiança que acompanham o aluno pela vida inteira. Tudo com metodologias certificadas internacionalmente e o coração na cultura amazônica.</p>
   <div class="hero-cta"><a href="#modalidades" class="btn btn-grad">Conheça as aulas</a><a href="#agendar" class="btn btn-ghost">Agende uma aula experimental</a></div>
-  <div class="hero-stats"><div><div class="n">10+</div><div class="l">anos de história</div></div><div><div class="n">12</div><div class="l">modalidades</div></div><div><div class="n">300+</div><div class="l">alunos por temporada</div></div><div><div class="n">2</div><div class="l">grandes espetáculos/ano</div></div></div>
+  <div class="hero-selos">
+    <div class="selo"><span class="si">🎓</span><div><b>Metodologias certificadas</b><span>Vaganova · Jazz For Fun · Hip-Hop IDMUS</span></div></div>
+    <div class="selo"><span class="si">🌍</span><div><b>Chancela do CID / UNESCO</b><span>Conselho Internacional de Dança</span></div></div>
+    <div class="selo"><span class="si">⭐</span><div><b>Reconhecimento nacional</b><span>Referência em formação artística no Pará</span></div></div>
+  </div>
 </div></section>
 
 <section class="wrap acessos"><div class="acessos-grid">
   <a href="${SISTEMA}/login" class="acard"><span class="ic" style="background:linear-gradient(135deg,#8C52FF,#b15cff)">⚙</span><h3>Sistema</h3><p>Acesso da equipe, secretaria e administração.</p><span class="go">Entrar →</span></a>
   <a href="${SISTEMA}/portal/login" class="acard"><span class="ic" style="background:linear-gradient(135deg,#ff5ca8,#ff8ac0)">♥</span><h3>Portal do Responsável</h3><p>Faturas, mensalidades, dependentes e comunicados.</p><span class="go">Acessar portal →</span></a>
   <a href="${SISTEMA}/webloja" class="acard"><span class="ic" style="background:linear-gradient(135deg,#6a3df5,#9a5cff)">🛍</span><h3>Web Loja</h3><p>Figurinos, calçados e produtos oficiais da escola.</p><span class="go">Ir às compras →</span></a>
-  <a href="${SISTEMA}/ingressos" class="acard"><span class="ic" style="background:linear-gradient(135deg,#ff7a3d,#ff5ca8)">🎟</span><h3>Bilheteria</h3><p>Ingressos dos espetáculos, direto e sem fila.</p><span class="go">Comprar ingresso →</span></a>
+  <a href="__BILHETERIA__" class="acard"><span class="ic" style="background:linear-gradient(135deg,#ff7a3d,#ff5ca8)">🎟</span><h3>Bilheteria</h3><p>Ingressos dos espetáculos, direto e sem fila.</p><span class="go">Comprar ingresso →</span></a>
 </div></section>
 
 <section class="sec wrap sobre" id="sobre">
@@ -258,7 +270,7 @@ const BODY = `
 <section class="sec eventos" id="eventos"><div class="wrap">
   <span class="eyebrow">Eventos & Espetáculos</span><h2>Próximos espetáculos</h2>
   <p class="lead">Espetáculos, mostras e festivais ao longo do ano. Os ingressos são vendidos direto pela bilheteria — sem passar pela loja, sem fila no dia.</p>
-  <div class="embreve"><b>Próximos espetáculos em breve</b>Estamos preparando a próxima agenda. Acompanhe por aqui e pelo nosso Instagram.<br><a href="${SISTEMA}/ingressos" class="btn btn-grad" style="margin-top:18px">🎟 Ver a bilheteria</a></div>
+  <!--EVENTOS-->
 </div></section>
 
 <section class="sec wrap" id="noticias">
@@ -322,7 +334,7 @@ const BODY = `
   <div class="foot-grid">
     <div><a href="#topo" class="brand" style="color:#fff;margin-bottom:14px"><span class="mark">✦</span> Conexão Dança</a><p style="font-size:14px;max-width:34ch">Centro de formação artística e cultural em Salinópolis-PA. Dança, inclusão e cultura amazônica.</p><div class="soc"><a href="https://instagram.com/conexaodanca.ltda">⌾</a><a href="https://wa.me/5591986023030">✆</a><a href="mailto:contato@conexaodanca.com">✉</a></div></div>
     <div><h4>Navegar</h4><a href="#sobre">Sobre</a><a href="#modalidades">Modalidades</a><a href="#eventos">Eventos</a><a href="#cafe">Café</a><a href="#equipe">Direção</a><a href="#apoiadores">Apoiadores</a></div>
-    <div><h4>Acessos</h4><a href="${SISTEMA}/login">Sistema</a><a href="${SISTEMA}/portal/login">Portal do Responsável</a><a href="${SISTEMA}/webloja">Web Loja</a><a href="${SISTEMA}/ingressos">Bilheteria</a><a href="${SISTEMA}/cafe/cardapio">Cardápio do Café</a></div>
+    <div><h4>Acessos</h4><a href="${SISTEMA}/login">Sistema</a><a href="${SISTEMA}/portal/login">Portal do Responsável</a><a href="${SISTEMA}/webloja">Web Loja</a><a href="__BILHETERIA__">Bilheteria</a><a href="${SISTEMA}/cafe/cardapio">Cardápio do Café</a></div>
     <div><h4>Contato</h4><a href="#contato">Viela Joaquim Távora, 44 — Salinópolis-PA</a><a href="tel:+5591986023030">(91) 98602-3030</a><a href="mailto:contato@conexaodanca.com">contato@conexaodanca.com</a></div>
   </div>
   <div class="foot-bottom"><span>© 2026 Conexão Dança. Todos os direitos reservados.</span><span>Feito com ♥ para quem dança.</span></div>
@@ -368,16 +380,38 @@ async function fetchInstagramGrid(): Promise<string> {
 
 const DIAS_ORDEM = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-// Painel ao vivo: lê os números agregados do sistema (conexaodanca.art.br).
-// Some (string vazia) se o sistema não responder.
-async function fetchPainel(): Promise<string> {
+const EVENTOS_FALLBACK = `<div class="embreve"><b>Próximos espetáculos em breve</b>Estamos preparando a próxima agenda. Acompanhe por aqui e pelo nosso Instagram.</div>`;
+
+type EventoItem = {
+  titulo?: string;
+  evento?: string;
+  data?: string;
+  dia?: string;
+  mes?: string;
+  dataLabel?: string;
+  hora?: string;
+  local?: string;
+  cidade?: string;
+  slug?: string;
+  edicaoSlug?: string;
+};
+
+type SistemaRender = { painel: string; eventos: string; bilheteriaUrl: string };
+
+// Lê os dados públicos do sistema (conexaodanca.art.br) numa única chamada:
+// painel ao vivo (números/grade) + eventos à venda (bilheteria). Se o sistema
+// não responder, o painel some e a seção de eventos cai no "em breve".
+async function fetchSistema(): Promise<SistemaRender> {
+  const fallback: SistemaRender = { painel: "", eventos: EVENTOS_FALLBACK, bilheteriaUrl: "#eventos" };
   try {
     const res = await fetch("https://conexaodanca.art.br/api/public/stats", {
       next: { revalidate: 1800 },
     });
-    if (!res.ok) return "";
+    if (!res.ok) return fallback;
     const d: any = await res.json();
-    if (!d || typeof d.alunos !== "number") return "";
+    if (!d || typeof d.alunos !== "number") return fallback;
+
+    // ---------- Painel ao vivo ----------
     const grade: Array<{ dia: string; modalidade: string }> = Array.isArray(d.grade) ? d.grade : [];
     const hoje = String(d.hoje || "");
     const hojeMods = Array.from(new Set(grade.filter((g) => g.dia === hoje).map((g) => g.modalidade)));
@@ -392,7 +426,7 @@ async function fetchPainel(): Promise<string> {
       return `<div class="gcol${dia === hoje ? " today" : ""}"><h4>${dia}</h4>${items}</div>`;
     }).join("");
     const nMod = Array.isArray(d.modalidades) ? d.modalidades.length : 0;
-    return `<section class="sec painel" id="painel"><div class="wrap">
+    const painel = `<section class="sec painel" id="painel"><div class="wrap">
   <span class="eyebrow" style="color:#ff8ac0">A escola agora</span><h2 style="color:#fff">A Conexão Dança, ao vivo</h2>
   <p class="lead">Direto do nosso sistema — números reais que se atualizam sozinhos.</p>
   <div class="stats-row">
@@ -405,14 +439,73 @@ async function fetchPainel(): Promise<string> {
   <div class="grade-wk">${cols}</div>
   <p class="atualizado">Leitura automática do sistema da escola, atualizada a cada 30 min.</p>
 </div></section>`;
+
+    // ---------- Eventos à venda (bilheteria) ----------
+    const eventosArr: EventoItem[] = Array.isArray(d.eventos) ? d.eventos : [];
+    if (!eventosArr.length) {
+      return { painel, eventos: EVENTOS_FALLBACK, bilheteriaUrl: "#eventos" };
+    }
+    const resolved = eventosArr.map((ev) => {
+      const slug = String(ev.slug || "");
+      const url = slug ? `${SISTEMA}/ingressos/${encodeURIComponent(slug)}` : "#eventos";
+      return { ev, url };
+    });
+    const cards = resolved
+      .map(({ ev, url }) => {
+        const meta = [
+          ev.dataLabel ? `<span>📅 ${esc(String(ev.dataLabel))}</span>` : "",
+          ev.hora ? `<span>🕐 ${esc(String(ev.hora))}h</span>` : "",
+          ev.local ? `<span>📍 ${esc(String(ev.local))}</span>` : "",
+        ].join("");
+        return `<article class="evcard">
+      <div class="ph evph"><div class="date"><div class="d">${esc(String(ev.dia ?? ""))}</div><div class="m">${esc(String(ev.mes ?? ""))}</div></div><span class="evph-ic">🎭</span></div>
+      <div class="body">${ev.evento ? `<span class="fest">${esc(String(ev.evento))}</span>` : ""}<h3>${esc(String(ev.titulo ?? "Espetáculo"))}</h3><div class="meta">${meta}</div><a href="${url}" class="btn btn-grad">🎟 Comprar ingresso</a></div>
+    </article>`;
+      })
+      .join("");
+    // Dados estruturados (Schema.org) — ajuda o Google a exibir os espetáculos.
+    const ldData = resolved.map(({ ev, url }) => ({
+      "@context": "https://schema.org",
+      "@type": "DanceEvent",
+      name: `${ev.titulo ?? "Espetáculo"}${ev.evento ? ` — ${ev.evento}` : ""}`,
+      startDate: ev.data ? (ev.hora ? `${ev.data}T${ev.hora}:00-03:00` : ev.data) : undefined,
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: ev.local || "Conexão Dança",
+        address: ev.cidade || "Salinópolis, PA",
+      },
+      organizer: { "@type": "Organization", name: "Conexão Dança", url: "https://conexaodanca.com" },
+      offers: { "@type": "Offer", url, availability: "https://schema.org/InStock" },
+    }));
+    const ld = `<script type="application/ld+json">${JSON.stringify(ldData).replace(/</g, "\\u003c")}</script>`;
+    const eventos = `<div class="ev-grid">${cards}</div><p class="ev-note">Ingressos pela bilheteria oficial da Conexão Dança — pagamento por Pix ou cartão, com entrega imediata por e-mail.</p>${ld}`;
+
+    const edicaoSlug = String(eventosArr[0].edicaoSlug || "");
+    const firstSlug = String(eventosArr[0].slug || "");
+    const bilheteriaUrl = edicaoSlug
+      ? `${SISTEMA}/ingressos/edicao/${encodeURIComponent(edicaoSlug)}`
+      : firstSlug
+        ? `${SISTEMA}/ingressos/${encodeURIComponent(firstSlug)}`
+        : "#eventos";
+
+    return { painel, eventos, bilheteriaUrl };
   } catch {
-    return "";
+    return fallback;
   }
 }
 
 export default async function HomePage() {
-  const [igGrid, painel] = await Promise.all([fetchInstagramGrid(), fetchPainel()]);
-  const body = BODY.replace("<!--IG_GRID-->", igGrid).replace("<!--PAINEL-->", painel);
+  const [igGrid, sistema] = await Promise.all([
+    fetchInstagramGrid(),
+    fetchSistema(),
+  ]);
+  const body = BODY.replace("<!--IG_GRID-->", igGrid)
+    .replace("<!--PAINEL-->", sistema.painel)
+    .replace("<!--EVENTOS-->", sistema.eventos)
+    .split("__BILHETERIA__")
+    .join(sistema.bilheteriaUrl);
   const [agPre, agPost = ""] = body.split("<!--AGENDAR-->");
   return (
     <div className="cd-site">
