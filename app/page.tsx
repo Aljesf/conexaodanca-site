@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AgendaExperimental from "./AgendaExperimental";
 
 export const revalidate = 3600;
 
@@ -182,6 +183,24 @@ const CSS = `
 .cd-site .gcol .gi{font-size:12.5px;color:#e7ddff;padding:4px 0;border-top:1px solid rgba(255,255,255,.07)}
 .cd-site .painel .atualizado{margin-top:22px;font-size:12px;color:#8d7eb0}
 @media(max-width:760px){.cd-site .grade-wk{grid-template-columns:repeat(2,1fr)}}
+.cd-site .agendar{background:var(--lilas)}
+.cd-site .ag-form{margin-top:34px;max-width:760px;position:relative}
+.cd-site .ag-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cd-site .ag-grid label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#473a63}
+.cd-site .ag-grid .ag-full{grid-column:1/-1}
+.cd-site .ag-grid input,.cd-site .ag-grid select,.cd-site .ag-grid textarea{font-family:inherit;font-size:15px;font-weight:400;padding:12px 14px;border:1.5px solid #e3d7fb;border-radius:12px;background:#fff;color:var(--tinta);width:100%}
+.cd-site .ag-grid input:focus,.cd-site .ag-grid select:focus,.cd-site .ag-grid textarea:focus{outline:none;border-color:var(--roxo)}
+.cd-site .ag-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cd-site .ag-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.cd-site .ag-actions .btn[disabled]{opacity:.6;cursor:default}
+.cd-site .ag-erro{color:#c0392b;font-size:14px;margin-top:14px}
+.cd-site .ag-nota{font-size:12.5px;color:var(--muted);margin-top:14px;max-width:60ch}
+.cd-site .ag-ok{margin-top:34px;background:#fff;border:1px solid #e3d7fb;border-radius:var(--radius);padding:40px;text-align:center;max-width:620px}
+.cd-site .ag-ok-ic{width:60px;height:60px;border-radius:50%;background:var(--grad);color:#fff;font-size:30px;display:grid;place-items:center;margin:0 auto 16px}
+.cd-site .ag-ok h3{font-size:24px;margin-bottom:8px}
+.cd-site .ag-ok p{color:var(--muted);font-size:15px}
+.cd-site .ag-ok a{color:var(--roxo);font-weight:600}
+@media(max-width:620px){.cd-site .ag-grid{grid-template-columns:1fr}}
 `;
 
 const BODY = `
@@ -200,7 +219,7 @@ const BODY = `
   <span class="eyebrow" style="color:#ffd6ec">Centro de formação artística e cultural • Salinópolis/PA</span>
   <h1>O movimento que <em>conecta</em> corpo, arte e família.</h1>
   <p>Ballet, jazz, hip hop e muito mais, para todas as idades — com metodologia reconhecida internacionalmente e o coração na cultura amazônica. Mais que uma escola: um movimento.</p>
-  <div class="hero-cta"><a href="#modalidades" class="btn btn-grad">Conheça as aulas</a><a href="#contato" class="btn btn-ghost">Agende uma aula experimental</a></div>
+  <div class="hero-cta"><a href="#modalidades" class="btn btn-grad">Conheça as aulas</a><a href="#agendar" class="btn btn-ghost">Agende uma aula experimental</a></div>
   <div class="hero-stats"><div><div class="n">10+</div><div class="l">anos de história</div></div><div><div class="n">12</div><div class="l">modalidades</div></div><div><div class="n">300+</div><div class="l">alunos por temporada</div></div><div><div class="n">2</div><div class="l">grandes espetáculos/ano</div></div></div>
 </div></section>
 
@@ -294,8 +313,10 @@ const BODY = `
 
 <section class="sec cta-final"><div class="wrap">
   <h2>Sua próxima dança começa aqui</h2><p>Agende uma aula experimental gratuita e sinta a energia da Conexão Dança.</p>
-  <a href="#contato" class="btn btn-ghost" style="border-color:#fff">Quero experimentar</a>
+  <a href="#agendar" class="btn btn-ghost" style="border-color:#fff">Quero experimentar</a>
 </div></section>
+
+<!--AGENDAR-->
 
 <footer><div class="wrap">
   <div class="foot-grid">
@@ -392,10 +413,13 @@ async function fetchPainel(): Promise<string> {
 export default async function HomePage() {
   const [igGrid, painel] = await Promise.all([fetchInstagramGrid(), fetchPainel()]);
   const body = BODY.replace("<!--IG_GRID-->", igGrid).replace("<!--PAINEL-->", painel);
+  const [agPre, agPost = ""] = body.split("<!--AGENDAR-->");
   return (
     <div className="cd-site">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div dangerouslySetInnerHTML={{ __html: body }} />
+      <div dangerouslySetInnerHTML={{ __html: agPre }} />
+      <AgendaExperimental />
+      <div dangerouslySetInnerHTML={{ __html: agPost }} />
     </div>
   );
 }
