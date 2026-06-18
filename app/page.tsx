@@ -187,7 +187,7 @@ const CSS = `
 .cd-site .gal-grid img{width:100%;height:100%;object-fit:cover;transition:.5s}
 .cd-site .gal-grid figure:hover img{transform:scale(1.08)}
 @media(max-width:760px){.cd-site .gal-grid{grid-template-columns:repeat(2,1fr)}}
-.cd-site .apoio-logo{height:58px;width:auto;max-width:210px;object-fit:contain;background:#fff;border-radius:12px;padding:10px 16px;margin-bottom:18px;display:inline-block}
+.cd-site .apoio-logo{width:320px;max-width:100%;height:auto;border-radius:16px;margin-bottom:24px;display:block}
 .cd-site .movimento-logo{display:block;height:108px;width:auto;max-width:100%;margin-bottom:22px}
 @media(max-width:560px){.cd-site .movimento-logo{height:82px}}
 .cd-site .painel{background:linear-gradient(135deg,#2a1655,#1c1430);color:#fff}
