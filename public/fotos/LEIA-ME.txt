@@ -1,0 +1,26 @@
+COMO TROCAR AS FOTOS DO SITE
+=============================
+
+Coloque aqui os arquivos com EXATAMENTE estes nomes (tudo minusculo, sem acento).
+Aceita .jpg, .png ou .webp. Assim que o arquivo existir, ele aparece no site no
+lugar da foto provisoria — nao precisa mexer em codigo nem me chamar.
+
+MODALIDADES (cards) — de preferencia quadradas/paisagem, ~800x800 ou maior:
+  ballet.jpg          -> card Ballet Classico
+  jazz.jpg            -> card Jazz Dance
+  hip-hop.jpg         -> card Hip Hop
+  contemporaneo.jpg   -> card Contemporaneo
+  karate.jpg          -> card Karate e Kobudo
+  baby-class.jpg      -> card Baby Class
+
+TOPO E SECOES:
+  hero.jpg            -> foto de fundo do topo (paisagem, 1920x1080 ou maior)
+  cafe.jpg            -> foto do Cafe Conexao
+  gabrielle.jpg       -> foto da diretora (retrato, proporcao 4:5)
+
+GALERIA (mural de fotos):
+  coloque as fotos na subpasta  galeria/  com qualquer nome, por ex.:
+  galeria/01.jpg, galeria/02.jpg, galeria/espetaculo-2025.jpg ...
+  Entram na ordem do nome. A secao "Galeria" so aparece se houver fotos la.
+
+Dica: nomes sem espaco e sem acento evitam problemas (use - no lugar de espaco).

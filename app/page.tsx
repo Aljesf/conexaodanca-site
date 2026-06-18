@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import AgendaExperimental from "./AgendaExperimental";
 
@@ -116,8 +118,8 @@ const CSS = `
 .cd-site .ig-grid a:hover img{transform:scale(1.1)}
 @media(max-width:760px){.cd-site .ig-grid{grid-template-columns:repeat(3,1fr)}}
 .cd-site .cafe-inner{display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center}
-.cd-site .cafe-img{border-radius:28px;overflow:hidden;height:420px}
-.cd-site .cafe-img img{width:100%;height:100%;object-fit:cover}
+.cd-site .cafe-img{border-radius:28px;overflow:hidden;height:420px;background:linear-gradient(140deg,#241048,#15102a);display:grid;place-items:center;padding:44px}
+.cd-site .cafe-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 @media(max-width:860px){.cd-site .cafe-inner{grid-template-columns:1fr}.cd-site .cafe-img{height:300px}}
 .cd-site .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:42px}
 .cd-site .tcard{text-align:center}
@@ -172,6 +174,22 @@ const CSS = `
 .cd-site .apoio-cta a{color:#fff;text-decoration:underline}
 .cd-site .embreve{margin-top:42px;border:1.5px dashed #d9ccf5;border-radius:var(--radius);padding:48px 24px;text-align:center;color:var(--muted)}
 .cd-site .embreve b{display:block;font-family:'Fraunces',serif;font-size:24px;color:var(--tinta);margin-bottom:8px;font-weight:600}
+.cd-site .selos-band{background:#fff;border-top:1px solid #efe7ff;border-bottom:1px solid #efe7ff}
+.cd-site .selos-band .wrap{padding:44px 24px}
+.cd-site .selos-head{text-align:center;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+.cd-site .selos-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:34px}
+.cd-site .selo-logo{display:flex;flex-direction:column;align-items:center;gap:9px;max-width:160px;text-align:center}
+.cd-site .selo-logo img{height:76px;width:auto;max-width:150px;object-fit:contain}
+.cd-site .selo-logo span{font-size:12px;color:var(--muted);font-weight:600;line-height:1.25}
+.cd-site .galeria .lead{margin-bottom:0}
+.cd-site .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:42px}
+.cd-site .gal-grid figure{margin:0;aspect-ratio:1;border-radius:16px;overflow:hidden;position:relative}
+.cd-site .gal-grid img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.cd-site .gal-grid figure:hover img{transform:scale(1.08)}
+@media(max-width:760px){.cd-site .gal-grid{grid-template-columns:repeat(2,1fr)}}
+.cd-site .apoio-logo{height:58px;width:auto;max-width:210px;object-fit:contain;background:#fff;border-radius:12px;padding:10px 16px;margin-bottom:18px;display:inline-block}
+.cd-site .movimento-logo{display:block;height:108px;width:auto;max-width:100%;margin-bottom:22px}
+@media(max-width:560px){.cd-site .movimento-logo{height:82px}}
 .cd-site .painel{background:linear-gradient(135deg,#2a1655,#1c1430);color:#fff}
 .cd-site .painel .lead{color:#cbbce8}
 .cd-site .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:38px}
@@ -223,7 +241,7 @@ const BODY = `
   </div>
 </div></header>
 
-<section class="hero" id="topo"><div class="hero-bg"></div><div class="wrap hero-inner">
+<section class="hero" id="topo"><div class="hero-bg" style="__HERO_STYLE__"></div><div class="wrap hero-inner">
   <span class="eyebrow" style="color:#ffd6ec">Centro de formação artística e cultural • Salinópolis/PA</span>
   <h1>O movimento que <em>conecta</em> corpo, arte e família.</h1>
   <p>Dançar é formar corpo, mente e caráter. Em cada aula — do ballet ao hip hop, para todas as idades — nascem disciplina, expressão e autoconfiança que acompanham o aluno pela vida inteira. Tudo com metodologias certificadas internacionalmente e o coração na cultura amazônica.</p>
@@ -243,7 +261,7 @@ const BODY = `
 </div></section>
 
 <section class="sec wrap sobre" id="sobre">
-  <span class="eyebrow">O movimento Conexão Dança</span><h2>Mais que uma escola, um movimento</h2>
+  __LOGO_MOVIMENTO__<span class="eyebrow">O movimento Conexão Dança</span><h2>Mais que uma escola, um movimento</h2>
   <p class="lead">Somos um centro de formação artística e cultural em Salinópolis, no coração da Amazônia. Formamos bailarinos, fortalecemos a cultura paraense e usamos a dança como instrumento de inclusão social e transformação — levando arte e oportunidade a diferentes comunidades da nossa cidade e região.</p>
   <div class="valores-grid">
     <div class="vcard"><span class="vic">🩰</span><h3>Formação de excelência</h3><p>Metodologias reconhecidas internacionalmente — Vaganova, Jazz For Fun e o Hip-Hop do IDMUS — com o selo do CID, Conselho Internacional de Dança da UNESCO.</p></div>
@@ -252,18 +270,20 @@ const BODY = `
   </div>
 </section>
 
+<!--SELOS-->
+
 <!--PAINEL-->
 
 <section class="sec wrap" id="modalidades">
   <span class="eyebrow">Modalidades</span><h2>Encontre a sua dança</h2>
   <p class="lead">Turmas divididas por idade e nível, com metodologias reconhecidas internacionalmente — Vaganova no Ballet, Jazz For Fun e o Hip-Hop do IDMUS — e o selo do CID, Conselho Internacional de Dança da UNESCO.</p>
   <div class="mod-grid">
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=800&q=80" alt="Ballet"><div class="cap"><h3>Ballet Clássico</h3><p>Metodologia Vaganova · do baby class ao adulto</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=800&q=80" alt="Jazz"><div class="cap"><h3>Jazz Dance</h3><p>Método Jazz For Fun · técnica e palco</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1535525153412-5a42439a210d?auto=format&fit=crop&w=800&q=80" alt="Hip Hop"><div class="cap"><h3>Hip Hop</h3><p>Cultura urbana com o IDMUS · coreografia</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=800&q=80" alt="Contemporâneo"><div class="cap"><h3>Contemporâneo</h3><p>Criação e linguagem do corpo</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1524117074681-31bd4de22ad3?auto=format&fit=crop&w=800&q=80" alt="Baby Class"><div class="cap"><h3>Baby Class</h3><p>Primeiros passos, a partir de 3 anos</p></div></div>
-    <div class="mcard"><img src="https://images.unsplash.com/photo-1583244532610-2a234e7c3e84?auto=format&fit=crop&w=800&q=80" alt="Danças Urbanas"><div class="cap"><h3>Danças Urbanas</h3><p>Street, K-pop e freestyle</p></div></div>
+    <div class="mcard"><img src="__FOTO_BALLET__" alt="Ballet Clássico"><div class="cap"><h3>Ballet Clássico</h3><p>Metodologia Vaganova · do baby class ao adulto</p></div></div>
+    <div class="mcard"><img src="__FOTO_JAZZ__" alt="Jazz Dance"><div class="cap"><h3>Jazz Dance</h3><p>Método Jazz For Fun · técnica e palco</p></div></div>
+    <div class="mcard"><img src="__FOTO_HIPHOP__" alt="Hip Hop"><div class="cap"><h3>Hip Hop</h3><p>Cultura urbana com o IDMUS · coreografia</p></div></div>
+    <div class="mcard"><img src="__FOTO_CONTEMP__" alt="Dança Contemporânea"><div class="cap"><h3>Contemporâneo</h3><p>Criação e linguagem do corpo</p></div></div>
+    <div class="mcard"><img src="__FOTO_KARATE__" alt="Karatê e Kobudô"><div class="cap"><h3>Karatê e Kobudô</h3><p>Disciplina, foco e tradição · Dojo Conexão</p></div></div>
+    <div class="mcard"><img src="__FOTO_BABY__" alt="Baby Class"><div class="cap"><h3>Baby Class</h3><p>Primeiros passos, a partir de 3 anos</p></div></div>
   </div>
 </section>
 
@@ -286,13 +306,15 @@ const BODY = `
 
 <section class="sec wrap" id="cafe"><div class="cafe-inner">
   <div><span class="eyebrow">Café Conexão</span><h2>Um cafezinho enquanto a aula acontece</h2><p class="lead" style="margin-bottom:24px">O espaço de convivência da escola. Enquanto as crianças dançam, os responsáveis relaxam com café, lanches e companhia. Pais e alunos podem usar a conta interna e acompanhar tudo pelo portal.</p><a href="${SISTEMA}/cafe/cardapio" class="btn btn-grad">Ver o cardápio</a></div>
-  <div class="cafe-img"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80" alt="Café"></div>
+  <div class="cafe-img"><img src="__FOTO_CAFE__" alt="Café Conexão"></div>
 </div></section>
+
+<!--GALERIA-->
 
 <section class="sec director" id="equipe"><div class="wrap">
   <span class="eyebrow">Direção</span><h2>Gabrielle Ribeiro</h2>
   <div class="dir-inner" style="margin-top:30px">
-    <div class="dir-ph">GR</div>
+    <div class="dir-ph">__GABRIELLE__</div>
     <div>
       <span class="role">Diretora Geral · Artista, coreógrafa e empreendedora cultural</span>
       <p>À frente da Conexão Dança, Gabrielle é reconhecida nacionalmente na comunidade da dança e é membro fundadora do CID — Conselho Internacional de Dança da UNESCO, seção Belém, e do Colegiado de Dança do Pará.</p>
@@ -305,7 +327,7 @@ const BODY = `
 <section class="sec apoiadores" id="apoiadores"><div class="wrap">
   <span class="eyebrow" style="color:#ff8ac0">Apoiadores</span><h2 style="color:#fff">Quem caminha com a gente</h2>
   <p class="lead">Parcerias que tornam possível levar dança, formação e oportunidade a mais gente.</p>
-  <div class="apoio-destaque"><span class="badge">Patrocinador Oficial</span><h3>GAV Resorts</h3><p>Uma das maiores redes de multipropriedades do Brasil e parceira dos nossos projetos sociais — viabilizando formação artística gratuita para mais de 40 alunos em situação de vulnerabilidade, com acesso ao reconhecimento internacional do CID/UNESCO.</p></div>
+  <div class="apoio-destaque">__LOGO_GAV__<span class="badge">Patrocinador Oficial</span><h3>GAV Resorts</h3><p>Uma das maiores redes de multipropriedades do Brasil e parceira dos nossos projetos sociais — viabilizando formação artística gratuita para mais de 40 alunos em situação de vulnerabilidade, com acesso ao reconhecimento internacional do CID/UNESCO.</p></div>
   <p class="apoio-cta">Sua empresa também pode fazer parte desse movimento. <a href="#contato">Seja um apoiador</a>.</p>
 </div></section>
 
@@ -350,6 +372,41 @@ const IG_FALLBACK_GRID = `<a href="https://instagram.com/conexaodanca.ltda"><img
 
 const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+// ----- Imagens locais (public/) com fallback -----
+// Convenção: solte o arquivo com o nome combinado em public/fotos/ (fotos),
+// public/fotos/galeria/ (galeria) ou public/logos/ (logos) e a imagem aparece
+// sozinha. Se o arquivo não existir, usa o fallback — nunca quebra.
+const PUBLIC_DIR = path.join(process.cwd(), "public");
+const IMG_EXTS = ["jpg", "jpeg", "png", "webp", "avif"];
+
+function findAsset(base: string): string | null {
+  for (const ext of IMG_EXTS) {
+    try {
+      if (fs.existsSync(path.join(PUBLIC_DIR, `${base}.${ext}`))) return `/${base}.${ext}`;
+    } catch {
+      /* ignore */
+    }
+  }
+  return null;
+}
+
+function foto(nome: string, fallback: string): string {
+  return findAsset(`fotos/${nome}`) ?? fallback;
+}
+
+// Lista os arquivos de imagem de uma subpasta de public/ (ordem natural), p/ a galeria.
+function listAssets(subdir: string): string[] {
+  try {
+    return fs
+      .readdirSync(path.join(PUBLIC_DIR, subdir))
+      .filter((f) => IMG_EXTS.includes(f.split(".").pop()?.toLowerCase() ?? ""))
+      .sort((a, b) => a.localeCompare(b, "pt", { numeric: true }))
+      .map((f) => `/${subdir}/${f}`);
+  } catch {
+    return [];
+  }
+}
 
 async function fetchInstagramGrid(): Promise<string> {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -496,16 +553,95 @@ async function fetchSistema(): Promise<SistemaRender> {
   }
 }
 
+// Resolve todas as imagens locais (com fallback) e monta galeria + faixa de selos.
+function buildAssets() {
+  const U = (id: string, w = 800) =>
+    `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+  const fotos: Record<string, string> = {
+    __FOTO_BALLET__: foto("ballet", U("1547153760-18fc86324498")),
+    __FOTO_JAZZ__: foto("jazz", U("1504609773096-104ff2c73ba4")),
+    __FOTO_HIPHOP__: foto("hip-hop", U("1535525153412-5a42439a210d")),
+    __FOTO_CONTEMP__: foto("contemporaneo", U("1518834107812-67b0b7c58434")),
+    __FOTO_KARATE__: foto("karate", U("1583244532610-2a234e7c3e84")),
+    __FOTO_BABY__: foto("baby-class", U("1524117074681-31bd4de22ad3")),
+    __FOTO_CAFE__: foto("cafe", U("1554118811-1e0d58224f24", 900)),
+  };
+
+  const heroFoto = findAsset("fotos/hero");
+  const heroStyle = heroFoto
+    ? `background-image:url('${heroFoto}');background-size:cover;background-position:center`
+    : "";
+
+  const gabriFoto = findAsset("fotos/gabrielle");
+  const gabrielle = gabriFoto ? `<img src="${gabriFoto}" alt="Gabrielle Ribeiro">` : "GR";
+
+  const gavLogo = findAsset("logos/gav-resorts");
+  const logoGav = gavLogo ? `<img class="apoio-logo" src="${gavLogo}" alt="GAV Resorts">` : "";
+
+  const movLogo = findAsset("logos/movimento-conexao");
+  const logoMovimento = movLogo
+    ? `<img class="movimento-logo" src="${movLogo}" alt="Movimento Conexão Dança">`
+    : "";
+
+  const galImgs = listAssets("fotos/galeria");
+  const galeria = galImgs.length
+    ? `<section class="sec galeria"><div class="wrap">
+  <span class="eyebrow">Galeria</span><h2>A Conexão por dentro</h2>
+  <p class="lead">Momentos da escola, dos palcos e dos nossos alunos.</p>
+  <div class="gal-grid">${galImgs
+    .map((src) => `<figure><img src="${src}" alt="Conexão Dança" loading="lazy"></figure>`)
+    .join("")}</div>
+</div></section>`
+    : "";
+
+  const selosDefs: Array<[string, string]> = [
+    ["cid-unesco", "CID / UNESCO"],
+    ["jazz-for-fun", "Jazz For Fun"],
+    ["dojo-karate", "Dojo de Karatê"],
+    ["cid-amazonia", "CID · Seção Amazônia"],
+    ["idmus", "IDMUS · Hip-Hop"],
+    ["salinopolis", "Salinópolis · Pará"],
+  ];
+  const selosItens = selosDefs
+    .map(([base, nome]) => {
+      const src = findAsset(`logos/${base}`);
+      return src
+        ? `<div class="selo-logo"><img src="${src}" alt="${esc(nome)}"><span>${esc(nome)}</span></div>`
+        : "";
+    })
+    .filter(Boolean)
+    .join("");
+  const selos = selosItens
+    ? `<section class="selos-band"><div class="wrap">
+  <p class="selos-head">Métodos certificados, selos e reconhecimento</p>
+  <div class="selos-row">${selosItens}</div>
+</div></section>`
+    : "";
+
+  return { fotos, heroStyle, gabrielle, logoGav, logoMovimento, galeria, selos };
+}
+
 export default async function HomePage() {
-  const [igGrid, sistema] = await Promise.all([
-    fetchInstagramGrid(),
-    fetchSistema(),
-  ]);
-  const body = BODY.replace("<!--IG_GRID-->", igGrid)
-    .replace("<!--PAINEL-->", sistema.painel)
-    .replace("<!--EVENTOS-->", sistema.eventos)
-    .split("__BILHETERIA__")
-    .join(sistema.bilheteriaUrl);
+  const [igGrid, sistema] = await Promise.all([fetchInstagramGrid(), fetchSistema()]);
+  const a = buildAssets();
+
+  const repl: Array<[string, string]> = [
+    ["<!--IG_GRID-->", igGrid],
+    ["<!--PAINEL-->", sistema.painel],
+    ["<!--EVENTOS-->", sistema.eventos],
+    ["<!--GALERIA-->", a.galeria],
+    ["<!--SELOS-->", a.selos],
+    ["__HERO_STYLE__", a.heroStyle],
+    ["__GABRIELLE__", a.gabrielle],
+    ["__LOGO_GAV__", a.logoGav],
+    ["__LOGO_MOVIMENTO__", a.logoMovimento],
+    ["__BILHETERIA__", sistema.bilheteriaUrl],
+    ...Object.entries(a.fotos),
+  ];
+  let body = BODY;
+  for (const [token, val] of repl) body = body.split(token).join(val);
+
   const [agPre, agPost = ""] = body.split("<!--AGENDAR-->");
   return (
     <div className="cd-site">

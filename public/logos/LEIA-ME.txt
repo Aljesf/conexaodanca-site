@@ -1,0 +1,20 @@
+LOGOS E SELOS OFICIAIS
+======================
+
+Coloque aqui os logos (de preferencia PNG com fundo transparente).
+Aparecem sozinhos no site assim que o arquivo existir.
+
+FAIXA "Selos, metodos e credenciais" (logo abaixo da secao do movimento):
+  cid-unesco.png      -> CID / UNESCO
+  jazz-for-fun.png    -> Jazz For Fun
+  dojo-karate.png     -> Dojo de Karate
+  cid-amazonia.png    -> CID - Secao Amazonia
+  idmus.png           -> IDMUS - Hip-Hop
+  (a faixa so aparece se existir pelo menos um desses logos)
+
+APOIADORES:
+  gav-resorts.png     -> logo da GAV Resorts (na secao Apoiadores)
+
+LOGO DA ESCOLA:
+  o logo do topo e do rodape e /logo-conexao.png (ja esta na pasta public).
+  Para trocar, basta substituir esse arquivo mantendo o mesmo nome.

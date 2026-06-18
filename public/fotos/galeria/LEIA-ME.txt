@@ -1,0 +1,14 @@
+GALERIA DE FOTOS
+================
+
+Solte aqui qualquer quantidade de fotos (.jpg, .png ou .webp), com o nome que
+quiser. Elas aparecem na secao "Galeria" do site, na ordem do nome do arquivo.
+
+Exemplos:
+  01.jpg
+  02.jpg
+  espetaculo-brasilidades.jpg
+  aula-ballet.jpg
+
+Se nao houver nenhuma foto aqui, a secao Galeria simplesmente nao aparece.
+Sugestao: fotos paisagem ou quadradas ficam melhores no mural.
