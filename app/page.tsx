@@ -118,8 +118,8 @@ const CSS = `
 .cd-site .ig-grid a:hover img{transform:scale(1.1)}
 @media(max-width:760px){.cd-site .ig-grid{grid-template-columns:repeat(3,1fr)}}
 .cd-site .cafe-inner{display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center}
-.cd-site .cafe-img{border-radius:28px;overflow:hidden;height:420px;background:linear-gradient(140deg,#241048,#15102a);display:grid;place-items:center;padding:44px}
-.cd-site .cafe-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.cd-site .cafe-img{border-radius:28px;overflow:hidden;height:420px;background:#fef6f0;display:grid;place-items:center;box-shadow:0 16px 40px rgba(60,30,120,.12)}
+.cd-site .cafe-img img{width:100%;height:100%;object-fit:cover}
 @media(max-width:860px){.cd-site .cafe-inner{grid-template-columns:1fr}.cd-site .cafe-img{height:300px}}
 .cd-site .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:42px}
 .cd-site .tcard{text-align:center}
@@ -246,11 +246,6 @@ const BODY = `
   <h1>O movimento que <em>conecta</em> corpo, arte e família.</h1>
   <p>Dançar é formar corpo, mente e caráter. Em cada aula — do ballet ao hip hop, para todas as idades — nascem disciplina, expressão e autoconfiança que acompanham o aluno pela vida inteira. Tudo com metodologias certificadas internacionalmente e o coração na cultura amazônica.</p>
   <div class="hero-cta"><a href="#modalidades" class="btn btn-grad">Conheça as aulas</a><a href="#agendar" class="btn btn-ghost">Agende uma aula experimental</a></div>
-  <div class="hero-selos">
-    <div class="selo"><span class="si">🎓</span><div><b>Metodologias certificadas</b><span>Vaganova · Jazz For Fun · Hip-Hop IDMUS</span></div></div>
-    <div class="selo"><span class="si">🌍</span><div><b>Chancela do CID / UNESCO</b><span>Conselho Internacional de Dança</span></div></div>
-    <div class="selo"><span class="si">⭐</span><div><b>Reconhecimento nacional</b><span>Referência em formação artística no Pará</span></div></div>
-  </div>
 </div></section>
 
 <section class="wrap acessos"><div class="acessos-grid">
